@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ControleFinanceiro-App:build:production"
+              "buildTarget": "ControleFinanceiro-App:build:production"
             },
             "development": {
-              "browserTarget": "ControleFinanceiro-App:build:development"
+              "buildTarget": "ControleFinanceiro-App:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ControleFinanceiro-App:build"
+            "buildTarget": "ControleFinanceiro-App:build"
           }
         },
         "test": {
