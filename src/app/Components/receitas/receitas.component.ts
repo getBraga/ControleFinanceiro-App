@@ -3,6 +3,7 @@ import { ReceitaService } from '../../services/receita.service';
 import { Receita } from '../../models/Receita';
 import { FormatPrice } from '../../helpers/FormatPrice.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-receitas',
 
@@ -18,7 +19,8 @@ export class ReceitasComponent implements OnInit {
 
   constructor(
     private receitaService: ReceitaService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastr: ToastrService
   ) {
     this.modalRef = new BsModalRef();
   }
@@ -83,11 +85,11 @@ export class ReceitasComponent implements OnInit {
     });
   }
   openModal(template: TemplateRef<any>) {
-    console.log('oiiiiiiiiii');
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
   confirm() {
     this.modalRef.hide();
+    this.toastr.success('Receita excluida com sucesso.', 'Sucesso!');
   }
   decline() {
     this.modalRef.hide();

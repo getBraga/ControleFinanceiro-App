@@ -15,6 +15,7 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'increasing',
+    }),
   ],
   providers: [provideHttpClient(), ReceitaService],
   bootstrap: [AppComponent],
