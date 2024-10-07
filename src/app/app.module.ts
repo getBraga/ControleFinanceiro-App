@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReceitasComponent } from './receitas/receitas.component';
+import { ReceitasComponent } from './Components/receitas/receitas.component';
 import { DespesasComponent } from './despesas/despesas.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

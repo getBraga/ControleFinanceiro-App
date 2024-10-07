@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ReceitaService } from '../services/receita.service';
-import { Receita } from '../models/Receita';
-import { FormatPrice } from '../helpers/FormatPrice.component';
+import { ReceitaService } from '../../services/receita.service';
+import { Receita } from '../../models/Receita';
+import { FormatPrice } from '../../helpers/FormatPrice.component';
 @Component({
   selector: 'app-receitas',
 
@@ -44,11 +44,7 @@ export class ReceitasComponent implements OnInit {
     this.getReceitas();
   }
   private calcularReceita(receitas: any[] = []) {
-    this.valorTotal = 0;
-    receitas.map((receita) => {
-      this.valorTotal += receita.valor;
-    });
-    return this.valorTotal;
+    this.totalReceita = new FormatPrice().calcularValorTotal(receitas);
   }
   public precoFormatado(valor: number): string {
     return new FormatPrice(valor).formatarPreco();
@@ -63,12 +59,12 @@ export class ReceitasComponent implements OnInit {
     this.receitaService.getReceitas().subscribe({
       next: (_receitas: Receita[]) => {
         var array = Object.entries(_receitas).map(([chave, receita]) => {
-          this.valorTotal += receita.valor;
           return receita;
         });
 
         this._receitas.push(...array);
         this.receitas = this._receitas;
+        this.calcularReceita(this._receitas);
       },
       error: (error) => {
         console.error('error', error);
