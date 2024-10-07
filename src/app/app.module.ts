@@ -14,6 +14,7 @@ import { ReceitaService } from './services/receita.service';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   providers: [provideHttpClient(), ReceitaService],
   bootstrap: [AppComponent],

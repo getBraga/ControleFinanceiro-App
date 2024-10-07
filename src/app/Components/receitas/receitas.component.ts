@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ReceitaService } from '../../services/receita.service';
 import { Receita } from '../../models/Receita';
 import { FormatPrice } from '../../helpers/FormatPrice.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-receitas',
 
@@ -9,12 +10,22 @@ import { FormatPrice } from '../../helpers/FormatPrice.component';
   styleUrls: ['./receitas.component.scss'],
 })
 export class ReceitasComponent implements OnInit {
-  [x: string]: any;
+  modalRef: BsModalRef;
   public receitas: Receita[] = [];
   private _receitas: Receita[] = [];
   public totalReceita: number = 0.0;
-  public valorTotal: number = 0;
   private _filtroReceita: string = '';
+
+  constructor(
+    private receitaService: ReceitaService,
+    private modalService: BsModalService
+  ) {
+    this.modalRef = new BsModalRef();
+  }
+  public ngOnInit(): void {
+    this.getReceitas();
+  }
+
   public get filtroReceita(): string {
     return this._filtroReceita;
   }
@@ -39,10 +50,7 @@ export class ReceitasComponent implements OnInit {
       );
     });
   }
-  constructor(private receitaService: ReceitaService) {}
-  public ngOnInit(): void {
-    this.getReceitas();
-  }
+
   private calcularReceita(receitas: any[] = []) {
     this.totalReceita = new FormatPrice().calcularValorTotal(receitas);
   }
@@ -73,5 +81,15 @@ export class ReceitasComponent implements OnInit {
         console.log('loading', this.receitas);
       },
     });
+  }
+  openModal(template: TemplateRef<any>) {
+    console.log('oiiiiiiiiii');
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+  confirm() {
+    this.modalRef.hide();
+  }
+  decline() {
+    this.modalRef.hide();
   }
 }
