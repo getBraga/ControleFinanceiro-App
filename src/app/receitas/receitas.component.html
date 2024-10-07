@@ -1,17 +1,24 @@
-
 <h2>Receitas</h2>
-<hr>
+<hr />
 <div action="" class="form-inline">
   <div class="form-group mb-2">
     <label class="mr-2">Filtro:</label>
-    <input type="search" class="form-control mr-2 search-input" placeholder="buscar" [(ngModel)]="filtroReceita">
+    <input
+      type="search"
+      class="form-control mr-2 search-input"
+      placeholder="buscar"
+      [(ngModel)]="filtroReceita"
+    />
   </div>
 </div>
 
- <table class="table table-striped"data-filter-control="true"
- data-show-search-clear-button="true">
+<table
+  class="table table-striped"
+  data-filter-control="true"
+  data-show-search-clear-button="true"
+>
   <thead class="thead-dark">
-<tr>
+    <tr>
       <th hidden>#</th>
 
       <th data-field="name" data-filter-control="input">Nome</th>
@@ -24,23 +31,36 @@
       <th>Ações</th>
     </tr>
   </thead>
-  <tbody *ngIf="receitas && receitas.length" >
-    <tr  *ngFor="let receita of receitas" >
-      <td hidden>{{receita.id}}</td>
-      <td>{{receita.nome}}</td>
-      <td>{{receita.descricao}}</td>
-      <td>{{receita.valor}}</td>
-
-      <td>{{receita.empresa.nome}}</td>
-      <td>{{receita.numeroParcelas}}</td>
-      <td>{{receita.data}}</td>
-      <td>{{receita.dataVenc}}</td>
+  <tbody *ngIf="receitas && receitas.length">
+    <tr *ngFor="let receita of receitas">
+      <td hidden>{{ receita.id }}</td>
+      <td>{{ receita.nome }}</td>
+      <td>{{ receita.descricao }}</td>
       <td>
-        <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
-<button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        {{ precoFormatado(receita.valor) }}
+      </td>
+
+      <td>{{ receita.empresa?.nome }}</td>
+      <td>{{ receita.numeroParcelas }}</td>
+      <td>{{ receita.data | DateFormatPipe }}</td>
+      <td>{{ receita.data | DateFormatPipe }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm mr-2"
+          tooltip="Editar Receita"
+        >
+          <i class="fa fa-edit"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          tooltip="Excluir Receita"
+        >
+          <i class="fa fa-trash"></i>
+        </button>
       </td>
     </tr>
-
   </tbody>
   <tfoot *ngIf="!receitas.length">
     <tr>
@@ -51,5 +71,5 @@
   </tfoot>
 </table>
 <div class="text-right">
-  <h4 style="color: green">Receita Total: {{valorTotal}}</h4>
+  <h4 style="color: green">Receita Total: {{ valorTotal }}</h4>
 </div>

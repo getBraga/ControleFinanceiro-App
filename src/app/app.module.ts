@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {provideHttpClient} from '@angular/common/http';
-import {FormsModule} from '@angular/forms'
+import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReceitasComponent } from './receitas/receitas.component';
@@ -9,29 +9,31 @@ import { DespesasComponent } from './despesas/despesas.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
-import {CollapseModule} from "ngx-bootstrap/collapse"
-
-
-
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ReceitaService } from './services/receita.service';
+import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 @NgModule({
   declarations: [
     AppComponent,
     ReceitasComponent,
     DespesasComponent,
     EmpresasComponent,
+    DateTimeFormatPipe,
 
-      NavComponent
-   ],
+    NavComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
-
-
   ],
-  providers: [provideHttpClient()],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(), ReceitaService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
