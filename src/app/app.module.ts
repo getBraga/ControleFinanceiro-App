@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,9 @@ import { ToastrModule } from 'ngx-toastr';
       progressBar: true,
       progressAnimation: 'increasing',
     }),
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [provideHttpClient(), ReceitaService],
   bootstrap: [AppComponent],
 })

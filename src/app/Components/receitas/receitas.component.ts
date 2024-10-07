@@ -4,6 +4,7 @@ import { Receita } from '../../models/Receita';
 import { FormatPrice } from '../../helpers/FormatPrice.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-receitas',
 
@@ -20,11 +21,13 @@ export class ReceitasComponent implements OnInit {
   constructor(
     private receitaService: ReceitaService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.modalRef = new BsModalRef();
   }
   public ngOnInit(): void {
+    this.spinner.show();
     this.getReceitas();
   }
 
@@ -77,10 +80,12 @@ export class ReceitasComponent implements OnInit {
         this.calcularReceita(this._receitas);
       },
       error: (error) => {
-        console.error('error', error);
+        this.spinner.hide();
+        this.toastr.error(`${error}`, 'error');
       },
       complete: () => {
-        console.log('loading', this.receitas);
+        this.spinner.hide();
+        this.toastr.success('Receita carregada com sucesso.', 'Sucesso!');
       },
     });
   }
