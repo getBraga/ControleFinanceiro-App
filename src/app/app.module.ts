@@ -17,6 +17,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TituloComponent } from './shared/titulo/titulo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     DespesasComponent,
     EmpresasComponent,
     DateTimeFormatPipe,
-
+    TituloComponent,
     NavComponent,
   ],
   imports: [
