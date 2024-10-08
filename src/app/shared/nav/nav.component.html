@@ -21,17 +21,19 @@
       id="navbarNav"
     >
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Receita</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" aria-current="page" routerLink="receitas"
+            >Receitas</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Despesas</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="despesas">Despesas</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Resultado</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="resultados">Resultados</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Contatos</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="contato">Contato</a>
         </li>
       </ul>
 
@@ -40,7 +42,6 @@
           <a
             dropdownToggle
             class="nav-link dropdown-toggle"
-            href="#"
             id="navbarDropdownMenuLink"
             data-toggle="dropdown"
             aria-haspopup="true"
@@ -53,9 +54,9 @@
             class="dropdown-menu"
             aria-labelledby="navbarDropdownMenuLink"
           >
-            <a class="dropdown-item" href="#"> Perfil </a>
+            <a class="dropdown-item" routerLink="perfil"> Perfil </a>
             <div role="separator" class="divider"></div>
-            <a class="dropdown-item" href="#"> Sair </a>
+            <a class="dropdown-item" routerLink="sair"> Sair </a>
           </div>
         </li>
       </ul>

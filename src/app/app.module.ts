@@ -21,7 +21,7 @@ import { EmpresasComponent } from './Components/empresas/empresas.component';
 import { ContatoComponent } from './Components/contato/contato.component';
 import { PerfilComponent } from './Components/perfil/perfil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './shared/nav/nav.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { ResultadoComponent } from './Components/resultado/resultado.component';
 
