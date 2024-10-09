@@ -86,7 +86,7 @@ export class ReceitaListaComponent implements OnInit {
       },
       complete: () => {
         this.spinner.hide();
-        this.toastr.success('Receita carregada com sucesso.', 'Sucesso!');
+        // this.toastr.success('Receita carregada com sucesso.', 'Sucesso!');
       },
     });
   }
