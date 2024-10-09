@@ -11,6 +11,7 @@ export class TituloComponent implements OnInit {
   @Input() subtitulo: string = 'Desde 2024';
   @Input() mostrarListar: boolean = false;
   @Input() nomeListar: string = '';
+  @Input() rotaTela: string = '';
   constructor() {}
 
   ngOnInit() {}

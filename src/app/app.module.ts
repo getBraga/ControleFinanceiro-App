@@ -16,7 +16,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { ReceitasComponent } from './Components/receitas/receitas.component';
+import { ReceitaDetalheComponent } from './Components/receitas/receita-detalhe/receita-detalhe.component';
+import { ReceitaListaComponent } from './Components/receitas/receita-lista/receita-lista.component';
 import { DespesasComponent } from './Components/despesas/despesas.component';
+import { DespesaDetalheComponent } from './Components/despesas/despesa-detalhe/despesa-detalhe.component';
 import { EmpresasComponent } from './Components/empresas/empresas.component';
 import { ContatoComponent } from './Components/contato/contato.component';
 import { PerfilComponent } from './Components/perfil/perfil.component';
@@ -37,6 +40,9 @@ import { ResultadoComponent } from './Components/resultado/resultado.component';
     ContatoComponent,
     PerfilComponent,
     ResultadoComponent,
+    ReceitaDetalheComponent,
+    DespesaDetalheComponent,
+    ReceitaListaComponent,
   ],
   imports: [
     BrowserModule,
