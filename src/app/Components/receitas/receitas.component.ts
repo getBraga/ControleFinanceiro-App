@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ReceitaService } from '../../services/receita.service';
-import { Receita } from '../../models/Receita';
-import { FormatPrice } from '../../helpers/FormatPrice.component';
+import { ReceitaService } from '@app/services/receita.service';
+import { Receita } from '@app/models/Receita';
+import { FormatPrice } from '@app/helpers/FormatPrice.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
