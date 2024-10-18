@@ -13,13 +13,11 @@ import {
 })
 export class ReceitaDetalheComponent implements OnInit {
   form: FormGroup;
-  fb: FormBuilder;
   get f(): any {
     return this.form.controls;
   }
-  constructor(private _fb: FormBuilder) {
-    this.fb = _fb;
-    this.form = _fb.group({});
+  constructor(private fb: FormBuilder) {
+    this.form = fb.group({});
   }
 
   ngOnInit() {
