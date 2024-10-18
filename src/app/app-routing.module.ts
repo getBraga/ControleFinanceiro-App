@@ -13,6 +13,7 @@ import { UserComponent } from './Components/user/user.component';
 import { LoginComponent } from './Components/user/login/login.component';
 import { RegistrarUsuarioComponent } from './Components/user/registrar-usuario/registrar-usuario.component';
 import { PerfilComponent } from './Components/user/perfil/perfil.component';
+import { EmpresasComponent } from './Components/empresas/empresas.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'contato',
     component: ContatoComponent,
+  },
+  {
+    path: 'empresas',
+    component: EmpresasComponent,
   },
 ];
 
