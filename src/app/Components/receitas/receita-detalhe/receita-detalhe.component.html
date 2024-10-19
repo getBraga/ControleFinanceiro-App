@@ -9,9 +9,7 @@
             class="form-control is-invalid"
             formControlName="nome"
             placeholder="Insira o Nome"
-            [ngClass]="{
-              'is-invalid': f.nome?.errors && f.nome?.touched
-            }"
+            [ngClass]="cssValidatorReceita(f.nome)"
           />
 
           <div *ngIf="f.nome?.errors?.required" class="invalid-feedback">
@@ -32,10 +30,9 @@
           <select
             type="number"
             class="form-control"
-            [ngClass]="{
-              'is-invalid': f.empresa?.errors && f.empresa?.touched
-            }"
+            [ngClass]="cssValidatorReceita(f.empresa)"
             formControlName="empresa"
+            [value]="receita.empresa && receita.empresa.id"
             placeholder=""
           >
             <option id="1" value="1">Santander</option>
@@ -51,9 +48,7 @@
             class="form-control"
             placeholder="R$:1000"
             formControlName="valor"
-            [ngClass]="{
-              'is-invalid': f.valor?.errors && f.valor?.touched
-            }"
+            [ngClass]="cssValidatorReceita(f.valor)"
           />
           <div *ngIf="f.valor?.errors?.required" class="invalid-feedback">
             O Valor é obrigatório
@@ -66,10 +61,7 @@
             class="form-control"
             formControlName="numeroParcelas"
             placeholder="Ex: 1"
-            [ngClass]="{
-              'is-invalid':
-                f.numeroParcelas?.errors && f.numeroParcelas?.touched
-            }"
+            [ngClass]="cssValidatorReceita(f.numeroParcelas)"
           />
           <div
             *ngIf="f.numeroParcelas?.errors?.required"
@@ -81,18 +73,20 @@
         <div class="form-group col-md-2">
           <label>Data Recebimento</label>
           <input
-            type="date"
-            class="form-control"
+            type="text"
+            class="form-control data-recebimento"
             formControlName="data"
             placeholder="Data do recebimento"
-            [ngClass]="{
-              'is-invalid': f.data?.errors && f.data?.touched
-            }"
+            [ngClass]="cssValidatorReceita(f.data)"
+            value="{{ receita.data | DateFormatPipe }}"
+            bsDatepicker
+            [bsConfig]="bsConfig"
           />
           <div *ngIf="f.data?.errors?.required" class="invalid-feedback">
             A Data é obrigatória
           </div>
         </div>
+        asdasdas {{ receita.data | DateFormatPipe }}
         <div class="form-group col-md-12">
           <label>Descrição</label>
           <textarea
@@ -100,9 +94,7 @@
             class="form-control"
             id="receita-descricao"
             formControlName="descricao"
-            [ngClass]="{
-              'is-invalid': f.descricao?.errors && f.descricao?.touched
-            }"
+            [ngClass]="cssValidatorReceita(f.descricao)"
           >
 Descricao</textarea
           >
