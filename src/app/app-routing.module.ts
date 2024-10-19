@@ -14,7 +14,8 @@ import { LoginComponent } from './Components/user/login/login.component';
 import { RegistrarUsuarioComponent } from './Components/user/registrar-usuario/registrar-usuario.component';
 import { PerfilComponent } from './Components/user/perfil/perfil.component';
 import { EmpresasComponent } from './Components/empresas/empresas.component';
-
+import { EmpresaListaComponent } from './Components/empresas/empresa-lista/empresa-lista.component';
+import { EmpresasDetalheComponent } from './Components/empresas/empresas-detalhe/empresas-detalhe.component';
 const routes: Routes = [
   {
     path: 'user',
@@ -59,6 +60,11 @@ const routes: Routes = [
   {
     path: 'empresas',
     component: EmpresasComponent,
+    children: [
+      { path: 'detalhe/:id', component: EmpresasDetalheComponent },
+      { path: 'lista', component: EmpresaListaComponent },
+      { path: 'novo', component: EmpresasDetalheComponent },
+    ],
   },
 ];
 

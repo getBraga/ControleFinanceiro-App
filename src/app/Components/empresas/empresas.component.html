@@ -1,1 +1,8 @@
-<app-titulo [titulo]="'Empresa'"></app-titulo>
+<app-titulo
+  [titulo]="'Empresa'"
+  [iconClass]="'fa fa-building'"
+  [mostrarListar]="true"
+  [nomeListar]="'Listar Empresas'"
+  [rotaTela]="'/empresas/lista'"
+></app-titulo>
+<router-outlet></router-outlet>
