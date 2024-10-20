@@ -1,3 +1,3 @@
 export class Constants {
-  static readonly Date_FMT = 'dd/mm/yyyy';
+  static readonly Date_FMT = 'dd/MM/YYYY';
 }
