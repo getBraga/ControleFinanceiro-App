@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CSSValidator } from '@app/helpers/CSSValidator';
 import { Receita } from '@app/models/Receita';
 import { ReceitaService } from '@app/services/receita.service';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,6 +22,7 @@ export class ReceitaDetalheComponent implements OnInit {
   form: FormGroup;
   receita = {} as Receita;
   cssValidator = new CSSValidator();
+  estadoSalvar = 'post';
   get f(): any {
     return this.form.controls;
   }
@@ -46,20 +47,28 @@ export class ReceitaDetalheComponent implements OnInit {
   }
   get bsConfig(): any {
     return {
+      isAnimated: true,
       adaptivePosition: true,
-      containerClass: 'theme-default',
-      dateInputFormat: 'dd/MM/yyyy hh:mm',
+      dateInputFormat: 'DD/MM/YYYY ',
+      containerClass: 'theme-dark-blue',
       showWeekNumbers: false,
     };
   }
+
   public carregarReceita(): void {
     const receitaIdParam = this.router.snapshot.paramMap.get('id');
+
     if (receitaIdParam !== null) {
       this.spinner.show();
+      this.estadoSalvar = 'put';
       this.receitaService.getReceitaById(+receitaIdParam).subscribe({
         next: (receita) => {
           this.receita = { ...receita };
+          if (this.receita.data) {
+            this.receita.data = new Date(this.receita.data!);
+          }
           this.form.patchValue(this.receita);
+
           window.localStorage.setItem(
             'date',
             JSON.stringify(this.receita.data)
@@ -75,6 +84,53 @@ export class ReceitaDetalheComponent implements OnInit {
       });
     }
   }
+  public salvarReceita(): void {
+    this.spinner.show();
+    if (this.form.valid) {
+      const verbHttp = this.estadoSalvar === 'post' ? 'post' : 'put';
+      this.receita =
+        this.estadoSalvar === 'post'
+          ? { ...this.form.value }
+          : { id: this.receita.id, ...this.form.value };
+      this.receita.instituicaoFinanceira = '';
+      if (this.receita.empresa && +this.receita.empresa) {
+        this.receita.empresaId = +this.receita.empresa;
+      }
+
+      this.receitaService[verbHttp](this.receita).subscribe({
+        next: (result) => {
+          this.toastr.success('Receita salva com sucesso', 'Sucesso');
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.spinner.hide();
+          this.toastr.error('Erro ao salvar a receita', 'Erro');
+        },
+        complete: () => {
+          this.spinner.hide();
+        },
+      });
+    }
+    // var receita: Receita = {
+    //   descricao: 'Teste',
+    //   id: 0,
+    //   nome: 'testando',
+    //   instituicaoFinanceira: '',
+    //   numeroParcelas: 0,
+    //   userId: 1,
+    //   valor: 234,
+    //   data: new Date('10/10/2024'),
+    //   dataVenc: new Date('10/10/2024'),
+    //   empresaId: 1,
+    // };
+
+    // this.receitaService.postReceitas(receita).subscribe({
+    //   next: (result) => {
+    //     console.log('result', result);
+    //   },
+    // });
+    // return receita;
+  }
   public validation(): void {
     this.form = this.fb.group({
       nome: [
@@ -86,7 +142,7 @@ export class ReceitaDetalheComponent implements OnInit {
         ],
       ],
       data: ['', Validators.required],
-      numeroParcelas: ['', Validators.required],
+      numeroParcelas: [this.receita.numeroParcelas || 1, Validators.required],
       valor: ['', Validators.required],
       descricao: [
         '',
