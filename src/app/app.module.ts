@@ -23,6 +23,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 import { NavComponent } from './shared/nav/nav.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
@@ -74,7 +75,7 @@ defineLocale('pt-br', ptBrLocale);
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-
+    NgxCurrencyDirective,
     ReactiveFormsModule,
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
