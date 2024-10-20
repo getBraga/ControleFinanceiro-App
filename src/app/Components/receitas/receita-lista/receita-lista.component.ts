@@ -19,6 +19,7 @@ export class ReceitaListaComponent implements OnInit {
   public totalReceita: number = 0.0;
   private _filtroReceita: string = '';
   private router: Router = new Router();
+  public receitaNome: string = '';
   constructor(
     private receitaService: ReceitaService,
     private modalService: BsModalService,
@@ -70,32 +71,47 @@ export class ReceitaListaComponent implements OnInit {
     return;
   }
   public getReceitas(): void {
-    this.receitaService.getReceitas().subscribe({
-      next: (_receitas: Receita[]) => {
-        var array = Object.entries(_receitas).map(([chave, receita]) => {
-          return receita;
-        });
+    this.receitaService
+      .getReceitas()
+      .subscribe({
+        next: (_receitas: any) => {
+          var array: Receita[] = Array.from(_receitas);
+          this._receitas = [];
+          this._receitas.push(...array);
+          this.receitas = this._receitas;
+          this.calcularReceita(this._receitas);
+        },
+        error: (error: any) => {
+          this.toastr.error(`A aplicação está fora do ar`, 'error');
+        },
+      })
+      .add(() => this.spinner.hide());
+  }
+  openModal(template: TemplateRef<any>, id: number, receitaNome: string) {
+    this.receitaNome = receitaNome;
+    this.modalRef = this.modalService.show(template, {
+      class: 'modal-sm',
+      id: id,
+    });
+  }
 
-        this._receitas.push(...array);
-        this.receitas = this._receitas;
-        this.calcularReceita(this._receitas);
+  excluirReceita(id: number) {
+    this.receitaService.deleteReceita(id).subscribe({
+      next: (result: any) => {
+        this.modalRef.hide();
+        this.toastr.success(`${result.message}`, 'Sucesso!');
+        this.getReceitas();
       },
       error: (error: any) => {
-        this.spinner.hide();
-        this.toastr.error(`${error}`, 'error');
-      },
-      complete: () => {
-        this.spinner.hide();
-        // this.toastr.success('Receita carregada com sucesso.', 'Sucesso!');
+        console.log(error, 'error');
       },
     });
   }
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-  }
   confirm() {
-    this.modalRef.hide();
-    this.toastr.success('Receita excluida com sucesso.', 'Sucesso!');
+    if (this.modalRef.id) {
+      var id = +this.modalRef.id;
+      this.excluirReceita(id);
+    }
   }
   decline() {
     this.modalRef.hide();
