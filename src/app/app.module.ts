@@ -1,6 +1,10 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -16,7 +20,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 
-import { ReceitaService } from './services/receita.service';
+import { ReceitaService } from './services/receita-services/receita.service';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -47,6 +51,9 @@ import { LoginComponent } from './Components/user/login/login.component';
 import { RegistrarUsuarioComponent } from './Components/user/registrar-usuario/registrar-usuario.component';
 import { PerfilComponent } from './Components/user/perfil/perfil.component';
 import { EmpresasDetalheComponent } from './Components/empresas/empresas-detalhe/empresas-detalhe.component';
+import { UserService } from './services/account-services/user.service';
+import { JwtInterceptor } from './interceptor/Jwt.Interceptor';
+import { HomeComponent } from './Components/home/home.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -70,6 +77,7 @@ defineLocale('pt-br', ptBrLocale);
     UserComponent,
     LoginComponent,
     RegistrarUsuarioComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +101,12 @@ defineLocale('pt-br', ptBrLocale);
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [provideHttpClient(), ReceitaService],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    ReceitaService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
