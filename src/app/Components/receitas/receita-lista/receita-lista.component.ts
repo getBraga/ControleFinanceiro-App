@@ -5,7 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FormatPrice } from 'src/app/helpers/FormatPrice.component';
 import { Receita } from 'src/app/models/Receita';
-import { ReceitaService } from 'src/app/services/receita.service';
+import { ReceitaService } from '@app/services/receita-services/receita.service';
 
 @Component({
   selector: 'app-receita-lista',

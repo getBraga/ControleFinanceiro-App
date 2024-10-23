@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CSSValidator } from '@app/helpers/CSSValidator';
 import { Receita } from '@app/models/Receita';
-import { ReceitaService } from '@app/services/receita.service';
+import { ReceitaService } from '@app/services/receita-services/receita.service';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';

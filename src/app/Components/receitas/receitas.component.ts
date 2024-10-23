@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ReceitaService } from '@app/services/receita.service';
+import { ReceitaService } from '@app/services/receita-services/receita.service';
 import { Receita } from '@app/models/Receita';
 import { FormatPrice } from '@app/helpers/FormatPrice.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
