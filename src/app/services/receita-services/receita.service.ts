@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
-import { Receita } from '../models/Receita';
+import { Receita } from '../../models/Receita';
 
 // A injeção está sendo feita no app module pelo provider
 @Injectable()

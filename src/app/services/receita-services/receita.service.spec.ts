@@ -1,12 +1,17 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, fakeAsync,waitForAsync, inject } from '@angular/core/testing';
-import { ReceitaService } from '../services/receita.service';
+import {
+  TestBed,
+  fakeAsync,
+  waitForAsync,
+  inject,
+} from '@angular/core/testing';
+import { ReceitaService } from './receita.service';
 
 describe('Service: Receita', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ReceitaService]
+      providers: [ReceitaService],
     });
   });
 

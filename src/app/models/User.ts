@@ -1,8 +1,9 @@
 export interface User {
   id: number;
-  primeiroNome: string;
-  nome: string;
+  firstName: string;
+  lastName: string;
+  token: string;
+  userName: string;
   email: string;
-  senha: string;
-  confirmSernha: string;
+  password: string;
 }

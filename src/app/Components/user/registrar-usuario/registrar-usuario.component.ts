@@ -5,7 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ValidatorField } from '@app/helpers/ValidatorField';
+import { User } from '@app/models/User';
+import { UserService } from '@app/services/account-services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -14,25 +18,29 @@ import { ValidatorField } from '@app/helpers/ValidatorField';
 })
 export class RegistrarUsuarioComponent {
   public formRegistrar: FormGroup;
-
+  user = {} as User;
   public get fR(): any {
-    console.log(this.formRegistrar.controls);
     return this.formRegistrar.controls;
   }
   ngOnInit() {
     this.validationRegister();
   }
-  constructor(private fRB: FormBuilder) {
+  constructor(
+    private fRB: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {
     this.formRegistrar = fRB.group({});
   }
 
   public validationRegister(): void {
     const formOptions: AbstractControlOptions = {
-      validators: ValidatorField.MustMatch('senha', 'confirmSenha'),
+      validators: ValidatorField.MustMatch('password', 'confirmPassword'),
     };
     this.formRegistrar = this.fRB.group(
       {
-        nome: [
+        username: [
           '',
           [
             Validators.required,
@@ -40,7 +48,7 @@ export class RegistrarUsuarioComponent {
             Validators.maxLength(30),
           ],
         ],
-        primeiroNome: [
+        firstName: [
           '',
           [
             Validators.required,
@@ -48,7 +56,7 @@ export class RegistrarUsuarioComponent {
             Validators.maxLength(10),
           ],
         ],
-        ultimoNome: [
+        lastName: [
           '',
           [
             Validators.required,
@@ -57,7 +65,7 @@ export class RegistrarUsuarioComponent {
           ],
         ],
         email: ['', [Validators.required, Validators.email]],
-        senha: [
+        password: [
           '',
           [
             Validators.required,
@@ -65,7 +73,7 @@ export class RegistrarUsuarioComponent {
             Validators.maxLength(30),
           ],
         ],
-        confirmSenha: [
+        confirmPassword: [
           '',
           [
             Validators.required,
@@ -76,5 +84,16 @@ export class RegistrarUsuarioComponent {
       },
       formOptions
     );
+  }
+  registrar(): void {
+    this.user = { ...this.formRegistrar.value };
+    this.userService.registrar(this.user).subscribe({
+      next: () => {
+        this.router.navigateByUrl('');
+      },
+      error: (error) => {
+        this.toaster.error(error);
+      },
+    });
   }
 }
