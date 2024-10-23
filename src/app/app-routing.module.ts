@@ -16,7 +16,55 @@ import { PerfilComponent } from './Components/user/perfil/perfil.component';
 import { EmpresasComponent } from './Components/empresas/empresas.component';
 import { EmpresaListaComponent } from './Components/empresas/empresa-lista/empresa-lista.component';
 import { EmpresasDetalheComponent } from './Components/empresas/empresas-detalhe/empresas-detalhe.component';
+import { AuthGuard } from './guard/auth.guard';
+import { HomeComponent } from './Components/home/home.component';
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'user/perfil',
+        component: PerfilComponent,
+      },
+      { path: 'receitas', redirectTo: 'receitas/lista' },
+      {
+        path: 'receitas',
+        component: ReceitasComponent,
+
+        children: [
+          { path: 'detalhe/:id', component: ReceitaDetalheComponent },
+          { path: 'lista', component: ReceitaListaComponent },
+          { path: 'novo', component: ReceitaDetalheComponent },
+        ],
+      },
+      {
+        path: 'despesas',
+        component: DespesasComponent,
+      },
+      {
+        path: 'resultados',
+        component: ResultadoComponent,
+      },
+      {
+        path: 'contato',
+        component: ContatoComponent,
+      },
+      {
+        path: 'empresas',
+        component: EmpresasComponent,
+
+        children: [
+          { path: 'detalhe/:id', component: EmpresasDetalheComponent },
+          { path: 'lista', component: EmpresaListaComponent },
+          { path: 'novo', component: EmpresasDetalheComponent },
+        ],
+      },
+    ],
+  },
   {
     path: 'user',
     component: UserComponent,
@@ -31,41 +79,7 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'user/perfil',
-    component: PerfilComponent,
-  },
-  { path: 'receitas', redirectTo: 'receitas/lista' },
-  {
-    path: 'receitas',
-    component: ReceitasComponent,
-    children: [
-      { path: 'detalhe/:id', component: ReceitaDetalheComponent },
-      { path: 'lista', component: ReceitaListaComponent },
-      { path: 'novo', component: ReceitaDetalheComponent },
-    ],
-  },
-  {
-    path: 'despesas',
-    component: DespesasComponent,
-  },
-  {
-    path: 'resultados',
-    component: ResultadoComponent,
-  },
-  {
-    path: 'contato',
-    component: ContatoComponent,
-  },
-  {
-    path: 'empresas',
-    component: EmpresasComponent,
-    children: [
-      { path: 'detalhe/:id', component: EmpresasDetalheComponent },
-      { path: 'lista', component: EmpresaListaComponent },
-      { path: 'novo', component: EmpresasDetalheComponent },
-    ],
-  },
+  { path: 'home', component: HomeComponent },
 ];
 
 @NgModule({
