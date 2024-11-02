@@ -13,9 +13,7 @@ import { User } from '@app/models/User';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private accountService: UserService) {
-    console.log('aqui esta chamando');
-  }
+  constructor(private accountService: UserService) {}
 
   intercept(
     request: HttpRequest<unknown>,

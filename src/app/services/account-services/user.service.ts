@@ -10,14 +10,13 @@ export class UserService {
 
   baseUrl = 'https://localhost:7112/api/Account/';
 
-  constructor(private http: HttpClient) {
-    console.log('afff', this.currentUserSource);
-  }
+  constructor(private http: HttpClient) {}
   public login(model: any): Observable<void> {
     return this.http.post<User>(this.baseUrl + 'login', model).pipe(
       take(1),
       map((response: User) => {
         const user = response;
+
         if (user) {
           this.setCurrentUser(user);
         }
@@ -37,7 +36,8 @@ export class UserService {
   }
   logout(): void {
     localStorage.removeItem('user');
-    this.currentUserSource.next(null as any);
+    let user: User = {} as User;
+    this.currentUserSource.next(user);
   }
 
   public setCurrentUser(user: User): void {

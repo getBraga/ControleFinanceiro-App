@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (JSON.parse(localStorage.getItem('user')!).token) return true;
-    console.log('oiiiiiiiiii');
+
     this.toaster.info('Usuário não autenticado!');
     this.router.navigate(['/user/login']);
     return false;

@@ -1,85 +1,121 @@
 <app-titulo [titulo]="'Perfil'"></app-titulo>
 
-<form>
-  <div class="row p-3">
-    <div class="col-lg-3 pt-1">
-      <div class="card mb-3">
-        <div class="card-header"></div>
-        <div class="d-flex align-self-center pt-3"></div>
-        <div class="card-body">
-          <div class="h4 text-center mb-3"></div>
-          <div class="h7 text-bold pb-1"><b>Nome:</b> Miracles Lee Cross</div>
-          <div class="h7">
-            Developer of web applications, JavaScript, PHP, Java, Python, Ruby,
-            Java, Node.js, etc.
-          </div>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-6 text-center border-right">
-                <div class="h5">1342</div>
-                <div class="h6 text-muted">Eventos Ministrados</div>
-              </div>
-              <div class="col-6 text-center">
-                <div class="h5">1342</div>
-                <div class="h6 text-muted">Eventos Participados</div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <div class="card-footer"></div>
-      </div>
-    </div>
-    <div class="col-lg-9">
+<form [formGroup]="formPerfil">
+  <div class="row">
+    <div class="col-lg-12">
       <div class="form-row">
         <div class="form-group col-12">
           <h3 class="border-bottom">Detalhe Perfil</h3>
         </div>
         <div class="form-group col">
-          <label>Título</label>
-          <select class="form-control">
-            <option value=""></option>
-            <option value="0">Não Quero</option>
-            <option value="Senhorita">Tecnólogo(a)</option>
-            <option value="Senhorita">Bacharel</option>
-            <option value="Senhorita">Especialista</option>
-            <option value="Senhorita">Pós Graduado(a)</option>
-            <option value="Senhorita">Mestre</option>
-            <option value="Senhorita">Doutor(a)</option>
-            <option value="Senhorita">Pós Doc</option>
-          </select>
+          <label>Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="username"
+            [ngClass]="{
+              'is-invalid': fF.username?.errors && fF.username?.touched
+            }"
+          />
+          <div *ngIf="fF.username?.errors?.required" class="invalid-feedback">
+            O nome é obrigatório
+          </div>
+          <div *ngIf="fF.username.errors?.minlength" class="invalid-feedback">
+            Deve ter no minimo 4 caracteres
+          </div>
+          <div *ngIf="fF.username?.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 10 caracteres
+          </div>
         </div>
         <div class="form-group col-sm-5">
           <label>Primeiro Nome</label>
-          <input type="text" class="form-control" />
+          <input
+            class="form-control"
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            [ngClass]="{
+              'is-invalid': fF.firstName?.errors && fF.firstName?.touched
+            }"
+          />
+
+          <div *ngIf="fF.firstName?.errors?.required" class="invalid-feedback">
+            O Primeiro nome é obrigatório
+          </div>
+          <div *ngIf="fF.firstName.errors?.minlength" class="invalid-feedback">
+            Deve ter no minimo 4 caracteres
+          </div>
+          <div *ngIf="fF.firstName?.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 10 caracteres
+          </div>
         </div>
         <div class="form-group col-sm-5">
           <label>Último nome</label>
-          <input type="text" class="form-control" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            [ngClass]="{
+              'is-invalid': fF.lastName?.errors && fF.lastName?.touched
+            }"
+          />
+          <div *ngIf="fF.lastName?.errors?.required" class="invalid-feedback">
+            O Último nome é obrigatório
+          </div>
+          <div *ngIf="fF.lastName.errors?.minlength" class="invalid-feedback">
+            Deve ter no minimo 4 caracteres
+          </div>
+          <div *ngIf="fF.lastName?.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 10 caracteres
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-sm-5">
           <label>E-mail</label>
-          <input type="text" class="form-control" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid': fF.email?.errors && fF.email?.touched
+            }"
+          />
+          <div
+            *ngIf="fF.email?.errors?.required && fF.email?.touched"
+            class="invalid-feedback"
+          >
+            O E-mail é obrigatório
+          </div>
+          <div
+            *ngIf="fF.email?.errors?.email && fF.email?.touched"
+            class="invalid-feedback"
+          >
+            Digite um e-mail válido
+          </div>
         </div>
         <div class="form-group col-sm-4">
           <label>Telefone</label>
-          <input type="text" class="form-control" />
+          <input
+            type="text"
+            formControlName="phoneNumber"
+            maxlength="12"
+            placeholder="ex: 11233335555"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': fF.phoneNumber.errors && fF.phoneNumber.touched
+            }"
+          />
+
+          <div
+            *ngIf="fF.phoneNumber.errors && fF.phoneNumber.touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fF.phoneNumber.errors.required">
+              Telefone é obrigatório
+            </div>
+          </div>
         </div>
-        <div class="form-group col-sm">
-          <label>Função</label>
-          <select class="form-control">
-            <option value=""></option>
-            <option value="Participante">Participante</option>
-            <option value="Palestrante">Palestrante</option>
-          </select>
-        </div>
-        <form-group class="col-12">
-          <label>Descrição</label>
-          <input type="text" class="form-control" />
-        </form-group>
       </div>
       <div>
         <h3 class="pt-3 border-bottom">Mudar Senha</h3>
@@ -88,11 +124,62 @@
       <div class="form-row">
         <div class="form-group col-sm">
           <label>Senha</label>
-          <input type="password" class="form-control" />
+          <input
+            class="form-control"
+            type="password"
+            placeholder="Digite uma Senha"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid': fF.password.errors && fF.password?.touched
+            }"
+          />
+          <div *ngIf="fF.password?.errors?.required" class="invalid-feedback">
+            A senha é obrigatório
+          </div>
+          <div *ngIf="fF.password.errors?.minlength" class="invalid-feedback">
+            Deve ter no minimo 4 caracteres
+          </div>
+          <div *ngIf="fF.password?.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 30 caracteres
+          </div>
         </div>
         <div class="form-group col-sm">
           <label>Confirmar Senha</label>
-          <input type="password" class="form-control" />
+          <input
+            class="form-control"
+            type="password"
+            placeholder="Confirme a Senha"
+            formControlName="confirmPassword"
+            [ngClass]="{
+              'is-invalid':
+                fF.confirmPassword.errors && fF.confirmPassword?.touched
+            }"
+          />
+          <div
+            *ngIf="fF.confirmPassword?.errors?.required"
+            class="invalid-feedback"
+          >
+            É obrigatório confirmar a senha
+          </div>
+          <div
+            *ngIf="fF.confirmPassword.errors?.minlength"
+            class="invalid-feedback"
+          >
+            Deve ter no minimo 4 caracteres
+          </div>
+          <div
+            *ngIf="fF.confirmPassword?.errors?.maxlength"
+            class="invalid-feedback"
+          >
+            Deve ter no máximo 30 caracteres
+          </div>
+
+          <div
+            *ngIf="fF.confirmPassword?.errors?.mustMatch"
+            class="invalid-feedback"
+          >
+            As senhas são diferentes
+          </div>
         </div>
       </div>
     </div>
